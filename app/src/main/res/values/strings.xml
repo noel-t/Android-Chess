@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidChess</string>
+    <string name="playback_game">Playback Game</string>
+    <string name="new_game">New Game</string>
+</resources>
