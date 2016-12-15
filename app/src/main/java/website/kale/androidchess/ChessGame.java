@@ -23,7 +23,108 @@ public class ChessGame{
 		moveList.add(board.getCopy());
 	}
 
-	public static void main(String[] args) throws IOException{
+	public String androidMove(String move){
+		String message = null;
+
+		if(!validateMove(move)){
+			return message = "Invalid move";
+		}
+
+		if(move.compareToIgnoreCase("undo") == 0){
+			if(unDid == true){
+				return message = "Can't undo more than once";
+			}
+			else if(moveList.size() > 1){
+				moveList.remove(moveList.size() - 1);
+				board = moveList.get(moveList.size() - 1).getCopy();
+				unDid = true;
+				return message;
+			}
+		}
+		else{
+			if(move.compareToIgnoreCase("resign") == 0){
+				if(colorToMove(board.whiteToMove) == ChessPiece.Color.WHITE){
+					gameOver = true;
+					return message = "Black wins";
+				}
+				else{
+					gameOver = true;
+					return message = "White wins";
+				}
+			}
+
+			//TODO: Draw Android Functionality
+			/*else if(move.compareToIgnoreCase("draw?") == 0){
+				if(offerDraw()){
+					System.out.println("Draw");
+					gameOver = true;
+					return;
+				}
+			}*/
+
+			else{
+				Square origin = new Square(ChessBoard.chessRankToRow((move.charAt(1)) - '0'),ChessBoard.chessFileToColumn(move.charAt(0)));
+				Square destination = new Square(ChessBoard.chessRankToRow(move.charAt(4) - '0'),ChessBoard.chessFileToColumn(move.charAt(3)));
+				takenPiece = pieceAt(destination);
+				makeMove(origin, destination);
+				//moveList.add(board.getCopy());
+
+				ChessPiece.Color currentColor = colorToMove(board.whiteToMove);
+				ChessPiece.Color opposingColor = colorToMove(!board.whiteToMove);
+
+				if(isInCheck(currentColor)){			//If player has put himself in check, revert move, declare invalid
+					makeMove(destination, origin);
+					board.board[destination.getRow()][destination.getColumn()] = takenPiece;
+					return message = "Can't put self in check";
+				}
+
+				else{
+					board.board[destination.getRow()][destination.getColumn()].hasMoved = true;
+					if((destination.getRow() == 7 || destination.getRow() == 0) && board.board[destination.getRow()][destination.getColumn()].getColor() == currentColor && board.board[destination.getRow()][destination.getColumn()].getType() == ChessPiece.Type.PAWN){
+						if(move.length() == 7){
+							promotion = abbreviationToType(move.charAt(6));
+							board.board[destination.getRow()][destination.getColumn()].setType(promotion);
+						}
+						else{
+							board.board[destination.getRow()][destination.getColumn()].setType(ChessPiece.Type.QUEEN);
+						}
+					}
+
+					if(isInCheck(opposingColor)){
+						if(isInCheckMate(opposingColor)){
+							//board.printBoard();
+							gameOver = true;
+							if(board.whiteToMove){
+								return message = "Checkmate. White wins";
+							}
+							else{
+								return message = "Checkmate. Black wins";
+							}
+
+							//return;
+						}
+						else{
+							message = "Check";
+						}
+					}
+					board.whiteToMove = !board.whiteToMove;
+				}
+				if(board.enPassant == true){
+					board.board[board.prevMove.getRow()][board.prevMove.getColumn()] = null;
+					board.enPassant = false;
+				}
+				board.prevMove = destination;
+				moveList.add(board.getCopy());
+				unDid = false;
+				return message;
+			}
+		}
+		return "Unexpected error"; //This line should never be reached
+
+
+	}
+
+	/*public static void main(String[] args) throws IOException{
 
 		while(!gameOver){
 			if(isInStaleMate(colorToMove(board.whiteToMove))){
@@ -139,7 +240,7 @@ public class ChessGame{
 				}
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * Asks the user for his or her move, only accepting valid moves.
