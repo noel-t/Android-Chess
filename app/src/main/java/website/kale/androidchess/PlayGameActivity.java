@@ -24,6 +24,7 @@ public class PlayGameActivity extends AppCompatActivity {
     ArrayAdapter chessGridAdapter;
     List<String> chessPieces;
     ImageView origin;
+    ChessGame chessGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class PlayGameActivity extends AppCompatActivity {
         origin = null;
         setContentView(R.layout.activity_play_game);
         chessGrid = (GridLayout) findViewById(R.id.chessboard);
-
+        chessGame = new ChessGame();
         drawBoard();
         drawPieces();
     }
@@ -79,7 +80,6 @@ public class PlayGameActivity extends AppCompatActivity {
                         if (origin == null) {
                             thisView.setBackgroundColor(Color.RED);
                             origin = thisView;
-
                         } else {
                             origin.setBackgroundColor(0);
                             origin = null;
