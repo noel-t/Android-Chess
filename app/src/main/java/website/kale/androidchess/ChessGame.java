@@ -293,6 +293,23 @@ public class ChessGame{
 	public static boolean validateMove(String move){
 		move = move.trim();
 		move = move.toLowerCase();
+
+		if(move.compareToIgnoreCase("undo") == 0){
+			return true;
+		}
+
+		if(move.compareToIgnoreCase("resign") == 0){
+			return true;
+		}
+
+		if(move.compareToIgnoreCase("draw?") == 0){
+			return true;
+		}
+
+		if(move.compareToIgnoreCase("ai") == 0){
+			return true;
+		}
+
 		if(!validateFormat(move)){	//1)
 			printIllegalMove();
 			return false;
