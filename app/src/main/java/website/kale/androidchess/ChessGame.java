@@ -1195,6 +1195,15 @@ public class ChessGame{
 		}
 	}
 
+	public String getCurrentTurnColorAsString(){
+		if(board.whiteToMove){
+			return "White";
+		}
+		else{
+			return "Black";
+		}
+	}
+
 	/**
 	 * Returns the piece at the given square
 	 * @param destination, the Square holding the given piece
