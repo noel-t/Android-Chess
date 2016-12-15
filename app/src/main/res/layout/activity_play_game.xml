@@ -9,12 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PlayGameActivity" >
 
-    <GridView
+    <GridLayout
         android:id="@+id/chessboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#000000"
         android:gravity="center_horizontal"
-        android:numColumns="8" >
-    </GridView>
+        android:columnCount="8"
+        android:rowCount="8" >
+    </GridLayout>
 </RelativeLayout>
