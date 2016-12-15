@@ -1,9 +1,18 @@
 package website.kale.androidchess;
 
+
 public class ChessBoard {
 	ChessPiece[][] board = new ChessPiece[8][8];
-	
+	public boolean whiteToMove;
+	public boolean enPassant;
+	public Square prevMove;
+
+	/**
+	 * Initializes the chessboard to the standard Chess configuration of 32 pieces, 16 for each side.
+	 */
 	public void initialize(){
+		whiteToMove = true;
+		enPassant = false;
 		int i = 0;
 		for(i = 0; i < 8; i++){									//Initialize Black Pieces
 			if( i == 0 || i == 7 )
@@ -20,7 +29,7 @@ public class ChessBoard {
 		for(i = 0; i < 8; i++){
 			board[1][i] = new Pawn(ChessPiece.Color.BLACK);
 		}
-		
+
 		for(i = 0; i < 8; i++){									//Initialize White Pieces
 			if( i == 0 || i == 7 )
 				board[7][i] = new Rook(ChessPiece.Color.WHITE);
@@ -37,7 +46,10 @@ public class ChessBoard {
 			board[6][i] = new Pawn(ChessPiece.Color.WHITE);
 		}
 	}
-	
+
+	/**
+	 * Prints board configuration using System.out.println()
+	 */
 	public void printBoard(){
 		for(int row = 0; row < 9; row++){
 			for(int column = 0; column < 9; column++){
@@ -52,24 +64,29 @@ public class ChessBoard {
 							System.out.print(rowToChessRank(row));
 					}
 				}
-				
+
 				else if(this.board[row][column] == null){
 					if(row % 2 == 0 && column % 2 == 1 || row % 2 == 1 && column % 2 == 0)
 						System.out.print("##");
 					else
 						System.out.print("  ");
 				}
-				
+
 				else
 					this.board[row][column].printAbbreviation();
-				
+
 				System.out.print(" ");
 			}
 			System.out.println();
 		}
 		System.out.println();
 	}
-	
+
+	/**
+	 * Converts array index to the displayed ChessBoard rank
+	 * @param row, an integer from 0-7
+	 * @return rank, an integer from 1-8
+	 */
 	public static int rowToChessRank(int row){
 		if(row == 0)
 			return 8;
@@ -88,6 +105,12 @@ public class ChessBoard {
 		else
 			return 1;
 	}
+
+	/**
+	 * Converts the displayed chess board rank to an array index
+	 * @param rank, an integer from 1-8
+	 * @return row, an integer from 0-7
+	 */
 	public static int chessRankToRow(int rank){
 		if(rank == 1)
 			return 7;
@@ -106,7 +129,12 @@ public class ChessBoard {
 		else
 			return 0;
 	}
-	
+
+	/**
+	 * Converts the displayed chess file to an array index
+	 * @param file, a character from 'a' - 'h'
+	 * @return column, an integer from 0-7
+	 */
 	public static int chessFileToColumn(char file){
 		if(file == 'h')
 			return 7;
@@ -125,7 +153,12 @@ public class ChessBoard {
 		else
 			return 0;
 	}
-	
+
+	/**
+	 * Converts an array index to a chess file character
+	 * @param column, an integer from 0-7
+	 * @return file, a char from 'a' - 'h'
+	 */
 	public static char columnToChessFile(int column){
 		if(column == 0)
 			return 'a';
@@ -144,4 +177,72 @@ public class ChessBoard {
 		else
 			return 'h';
 	}
+
+	public ChessBoard getCopy(){
+		ChessBoard copy = new ChessBoard();
+		copy.whiteToMove = this.whiteToMove;
+		copy.enPassant = this.enPassant;
+		copy.prevMove = this.prevMove;
+
+		for(int row = 0; row < 8; row++){
+			for(int column = 0; column < 8; column++){
+				if(this.board[row][column] != null){
+					if(this.board[row][column].getColor() == ChessPiece.Color.WHITE){
+						if(this.board[row][column].getType() == ChessPiece.Type.BISHOP){
+							copy.board[row][column] = new Bishop(ChessPiece.Color.WHITE);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.KING){
+							copy.board[row][column] = new King(ChessPiece.Color.WHITE);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.KNIGHT){
+							copy.board[row][column] = new Knight(ChessPiece.Color.WHITE);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.PAWN){
+							copy.board[row][column] = new Pawn(ChessPiece.Color.WHITE);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.QUEEN){
+							copy.board[row][column] = new Queen(ChessPiece.Color.WHITE);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.ROOK){
+							copy.board[row][column] = new Rook(ChessPiece.Color.WHITE);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+					}
+					else if(this.board[row][column].getColor() == ChessPiece.Color.BLACK){
+						if(this.board[row][column].getType() == ChessPiece.Type.BISHOP){
+							copy.board[row][column] = new Bishop(ChessPiece.Color.BLACK);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.KING){
+							copy.board[row][column] = new King(ChessPiece.Color.BLACK);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.KNIGHT){
+							copy.board[row][column] = new Knight(ChessPiece.Color.BLACK);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.PAWN){
+							copy.board[row][column] = new Pawn(ChessPiece.Color.BLACK);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.QUEEN){
+							copy.board[row][column] = new Queen(ChessPiece.Color.BLACK);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+						else if(this.board[row][column].getType() == ChessPiece.Type.ROOK){
+							copy.board[row][column] = new Rook(ChessPiece.Color.BLACK);
+							copy.board[row][column].hasMoved = this.board[row][column].hasMoved;
+						}
+					}
+				}
+			}
+		}
+		return copy;
+	}
+
 }
