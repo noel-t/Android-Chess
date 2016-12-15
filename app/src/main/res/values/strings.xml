@@ -7,4 +7,7 @@
     <string name="resign">Resign</string>
     <string name="ai">AI Move</string>
     <string name="undo">Undo</string>
+    <string name="dialog_draw">Are you sure you want to draw?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="11b73f85991891c53605bcb2d750156a949d0c32">
+        sha1="324077c5cbddb1432847883eb3e0f81b250e8132">
         <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1f90c1388738089b8e6c924889947f715a0beaa2/classes.dex" />
     </item>
     <item
@@ -97,7 +97,7 @@
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="ae0d078461ff38a1288c357adf67258874a30f4e">
+        sha1="c6fd7244d95fbde6fe2f6e07cf0373fd81428036">
         <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ebb10e4832f61633b4e22276bde2ee5e5e5200ce/classes.dex" />
     </item>
     <item

@@ -1,8 +1,12 @@
 package website.kale.androidchess;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,12 +34,11 @@ public class PlayGameActivity extends AppCompatActivity {
     ImageView origin;
     ChessGame chessGame;
     String moveString = "";
-    boolean needsPiece = true;
 
     class ChessPieceListener implements View.OnClickListener {
         private final int row, column;
 
-        public ChessPieceListener(int row, int column) {
+        ChessPieceListener(int row, int column) {
             this.row = row;
             this.column = column;
         }
@@ -54,6 +57,27 @@ public class PlayGameActivity extends AppCompatActivity {
                 origin.setBackgroundColor(0);
                 origin = null;
             }
+        }
+    }
+
+    public class ConfirmDrawDialogFragment extends android.app.DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.dialog_draw)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            makeMove("draw");
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+            return builder.create();
         }
     }
 
@@ -96,7 +120,7 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     public void callForDraw(View v) {
-        makeMove("draw");
+        new ConfirmDrawDialogFragment().show(getFragmentManager(), "Confirm Draw");
     }
 
     private void makeMove(String move) {
@@ -134,7 +158,7 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 ImageView newSpace = new ImageView(this);
-                String imageResourceString = null;
+                String imageResourceString;
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.height = 88;
                 param.width = 88;
@@ -153,6 +177,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         newSpace.setImageResource(drawableId);
                     }
                     catch (Exception e) {
+                        finish();
                     }
                 }
 
