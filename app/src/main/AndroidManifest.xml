@@ -15,8 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlayGame" />
         <activity android:name=".ReplayGame" />
+        <activity android:name=".PlayGameActivity"></activity>
     </application>
 
 </manifest>

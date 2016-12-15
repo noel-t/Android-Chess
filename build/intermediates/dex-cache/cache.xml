@@ -3,15 +3,6 @@
 
     <item
         is-multidex="true"
-        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.0.1_e84ae76be9e1b46dcdcfc8f16d94c2f568b678cc/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/libs/internal_impl-25.0.1.jar"
         jumboMode="true"
         optimize="true"
@@ -30,29 +21,11 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
-        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.0.1_37233e2cc8defcc62030191878bd55e472872514/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
-        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_d1844da8b364ec289ae0fd6a9b98e1b33f8db966/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
-        sha1="fb90941240a650482540310f22d918551ac8bf08">
+        sha1="c33dc43c9fa1e37c00308c3fd73a24d6ebde3c04">
         <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1f90c1388738089b8e6c924889947f715a0beaa2/classes.dex" />
     </item>
     <item
@@ -102,6 +75,87 @@
     </item>
     <item
         is-multidex="true"
+        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.1_f6f46a7ad829e86dd3daf2d0a3786aaa087fbf20/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_4d9a32ac1e062cf5bbf34f6349b4c365996a1cee/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c22dd37fdf998ffe32d9fd8641d882c88479cfca">
+        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ebb10e4832f61633b4e22276bde2ee5e5e5200ce/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
+        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.1_03ef4ce3da306ac82bfb3f83fd434aeedef714f6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
+        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.0.1_9fc13b0aa4ac52a31083b87dfef710f54e2d11ac/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
+        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.0.1_b0c758ace37c45ea4631c5b3e5e1cf79a5be7585/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-25.0.1_e84ae76be9e1b46dcdcfc8f16d94c2f568b678cc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/25.0.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="f7ac4b327fdb9e2ee386f5adc46164927658de4b">
+        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-25.0.1_37233e2cc8defcc62030191878bd55e472872514/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.1"
+        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
+        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_d1844da8b364ec289ae0fd6a9b98e1b33f8db966/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/libs/internal_impl-25.0.1.jar"
         jumboMode="true"
         optimize="true"
@@ -138,15 +192,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.1_f6f46a7ad829e86dd3daf2d0a3786aaa087fbf20/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -162,15 +207,6 @@
         revision="25.0.1"
         sha1="3af8cc51ef7088e56f132780da8c0bd858b6a6ad">
         <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_5706561e453cd54c5461941ff1131754eb5834be/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.0.1/jars/libs/internal_impl-25.0.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="c0bd6ffb002a85b5e7cad29f8558d1cc59539679">
-        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_4d9a32ac1e062cf5bbf34f6349b4c365996a1cee/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -192,15 +228,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="88064dc03bec57e85a601ee498a433ef08765521">
-        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_ebb10e4832f61633b4e22276bde2ee5e5e5200ce/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/25.0.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
@@ -210,30 +237,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="51eba4a4dd73044f90a9d58dd7ca34adbebfcf4e">
-        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-25.0.1_03ef4ce3da306ac82bfb3f83fd434aeedef714f6/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.0.1/jars/classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.1"
         sha1="6a1479afe9f1b3645e1cd9a87318976893472818">
         <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-25.0.1_aced9177b6b054ef9cbe7193c355ac5d8ad37ecb/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/25.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="b24e1c688744078e1fa833ffadf696794761bbe5">
-        <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-25.0.1_9fc13b0aa4ac52a31083b87dfef710f54e2d11ac/classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -279,15 +288,6 @@
         revision="25.0.1"
         sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
         <dex dex="/Users/douglasw/Documents/School/Fall 2016/Software Methodology/Assignment4_Android/androidchess57/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-25.0.1_508b25e763cc0c0f68dae38d916c10fa150ce21d/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.0.1/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.1"
-        sha1="00d4c8eebf2b681073c72a26bd0849549e51c7cb">
-        <dex dex="/Users/douglasw/AndroidStudioProjects/AndroidChess/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-25.0.1_b0c758ace37c45ea4631c5b3e5e1cf79a5be7585/classes.dex" />
     </item>
     <item
         is-multidex="true"
