@@ -12,14 +12,18 @@ public class ChessGame{
 	public static ChessBoard board;
 	public static boolean drawOffered = false;
 	public static boolean unDid = false;
-	public static void main(String[] args) throws IOException{
-		boolean gameOver = false;
-		ChessPiece takenPiece = null;
-		ChessPiece.Type promotion = null;
+	public static boolean gameOver = false;
+	public static ChessPiece takenPiece = null;
+	public static ChessPiece.Type promotion = null;
+	public static ArrayList<ChessBoard> moveList = new ArrayList<ChessBoard>();
+
+	ChessGame(){
 		board = new ChessBoard();
 		board.initialize();
-		ArrayList<ChessBoard> moveList = new ArrayList<ChessBoard>();
 		moveList.add(board.getCopy());
+	}
+
+	public static void main(String[] args) throws IOException{
 
 		while(!gameOver){
 			if(isInStaleMate(colorToMove(board.whiteToMove))){
