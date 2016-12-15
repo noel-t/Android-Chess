@@ -3,4 +3,7 @@
     <string name="playback_game">Playback Game</string>
     <string name="new_game">New Game</string>
     <string name="textview">TextView</string>
+    <string name="draw">Draw</string>
+    <string name="resign">Resign</string>
+    <string name="ai">AI Move</string>
 </resources>

@@ -18,4 +18,35 @@
         android:columnCount="8"
         android:rowCount="8" >
     </GridLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+
+        <Button
+            android:text="@string/draw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/drawButton"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="@string/resign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/resignButton"
+            android:layout_weight="1" />
+
+        <Button
+            android:text="@string/ai"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+
 </RelativeLayout>
