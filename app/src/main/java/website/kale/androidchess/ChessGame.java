@@ -10,16 +10,22 @@ import java.util.ArrayList;
 public class ChessGame{
 	//public static boolean whiteToMove;
 	public static ChessBoard board;
-	public static boolean drawOffered = false;
-	public static boolean unDid = false;
-	public static boolean gameOver = false;
-	public static ChessPiece takenPiece = null;
-	public static ChessPiece.Type promotion = null;
-	public static ArrayList<ChessBoard> moveList = new ArrayList<ChessBoard>();
+	public static boolean drawOffered;
+	public static boolean unDid;
+	public static boolean gameOver;
+	public static ChessPiece takenPiece;
+	public static ChessPiece.Type promotion;
+	public static ArrayList<ChessBoard> moveList;
 
 	ChessGame(){
 		board = new ChessBoard();
 		board.initialize();
+		drawOffered = false;
+		unDid = false;
+		gameOver = false;
+		takenPiece = null;
+		promotion = null;
+		moveList = new ArrayList<ChessBoard>();
 		moveList.add(board.getCopy());
 	}
 
