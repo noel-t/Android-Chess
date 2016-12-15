@@ -60,13 +60,10 @@ public class ChessGame{
 			}
 
 			//TODO: Draw Android Functionality
-			/*else if(move.compareToIgnoreCase("draw?") == 0){
-				if(offerDraw()){
-					System.out.println("Draw");
-					gameOver = true;
-					return;
-				}
-			}*/
+			else if(move.compareToIgnoreCase("draw") == 0){
+				gameOver = true;
+				return message = "Draw";
+			}
 
 			else{
 				Square origin = new Square(ChessBoard.chessRankToRow((move.charAt(1)) - '0'),ChessBoard.chessFileToColumn(move.charAt(0)));
@@ -269,7 +266,7 @@ public class ChessGame{
 				valid = true;
 				return moveString;
 			}
-			if(moveString.compareToIgnoreCase("draw?") == 0){
+			if(moveString.compareToIgnoreCase("draw") == 0){
 				valid = true;
 				return moveString;
 			}
@@ -308,7 +305,7 @@ public class ChessGame{
 			return true;
 		}
 
-		if(move.compareToIgnoreCase("draw?") == 0){
+		if(move.compareToIgnoreCase("draw") == 0){
 			return true;
 		}
 
