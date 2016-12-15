@@ -1,10 +1,12 @@
 package website.kale.androidchess;
 
 import android.app.ActionBar;
+import android.content.ClipData;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -44,15 +46,34 @@ public class PlayGameActivity extends AppCompatActivity {
             if (origin == null) {
                 thisView.setBackgroundColor(Color.RED);
                 origin = thisView;
-                moveString += ChessBoard.columnToChessFile(column) + ChessBoard.rowToChessRank(row);
+                moveString += "" + ChessBoard.columnToChessFile(column) + ChessBoard.rowToChessRank(row);
             } else {
-                moveString += " " + ChessBoard.columnToChessFile(column) + ChessBoard.rowToChessRank(row);
-                Toast.makeText(PlayGameActivity.this, moveString, Toast.LENGTH_SHORT).show();
+                moveString +=  " " + ChessBoard.columnToChessFile(column) + ChessBoard.rowToChessRank(row);
+                makeMove(moveString);
                 moveString = "";
                 origin.setBackgroundColor(0);
                 origin = null;
             }
         }
+    }
+
+    private int calculateNewIndex(float x, float y) {
+        // calculate which column to move to
+        final float cellWidth = chessGrid.getWidth() / chessGrid.getColumnCount();
+        final int column = (int)(x / cellWidth);
+
+        // calculate which row to move to
+        final float cellHeight = chessGrid.getHeight() / chessGrid.getRowCount();
+        final int row = (int)Math.floor(y / cellHeight);
+
+        // the items in the GridLayout is organized as a wrapping list
+        // and not as an actual grid, so this is how to get the new index
+        int index = row * chessGrid.getColumnCount() + column;
+        if (index >= chessGrid.getChildCount()) {
+            index = chessGrid.getChildCount() - 1;
+        }
+
+        return index;
     }
 
     @Override
@@ -64,6 +85,27 @@ public class PlayGameActivity extends AppCompatActivity {
         chessGame = new ChessGame();
         drawBoard();
         drawPieces();
+    }
+
+    public void callForUndo(View v) {
+        makeMove("undo");
+    }
+
+    public void callForResign(View v) {
+        makeMove("resign");
+    }
+
+    public void callForDraw(View v) {
+        makeMove("draw");
+    }
+
+    private void makeMove(String move) {
+        String response = chessGame.androidMove(move);
+        chessGrid.removeAllViews();
+        drawBoard();
+        drawPieces();
+        if (response != null)
+            Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
     }
 
     private void drawBoard() {
@@ -86,7 +128,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 chessGrid.addView(newSpace);
             }
         }
-
     }
 
     private void drawPieces() {
@@ -122,61 +163,64 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     private String buildPieceImageStringByCoordinates(int row, int column) {
-        if (needsPiece) {
-            needsPiece = false;
-            return "black_bishop";
-        } else {
-            needsPiece = true;
+//        if (needsPiece) {
+//            needsPiece = false;
+//            return "black_bishop";
+//        } else {
+//            needsPiece = true;
+//            return null;
+//        }
+
+
+        Square coordinates = new Square(row, column);
+        ChessPiece piece = chessGame.pieceAt(coordinates);
+        String imageIdString = "";
+
+        if (piece == null)
             return null;
+
+        switch (piece.getColor()) {
+            case BLACK:
+                imageIdString += "black_";
+                break;
+
+            case WHITE:
+                imageIdString += "white_";
+                break;
+
+            default:
+                return null;
         }
 
+        switch (piece.getType()) {
+            case PAWN:
+                imageIdString += "pawn";
+                break;
 
-//        Square coordinates = new Square(row, column);
-//        ChessPiece piece = chessGame.pieceAt(coordinates);
-//        String imageIdString = null;
-//
-//        switch (piece.getColor()) {
-//            case BLACK:
-//                imageIdString += "black_";
-//                break;
-//
-//            case WHITE:
-//                imageIdString += "white_";
-//                break;
-//
-//            default:
-//                return null;
-//        }
-//
-//        switch (piece.getType()) {
-//            case PAWN:
-//                imageIdString += "pawn";
-//                break;
-//
-//            case BISHOP:
-//                imageIdString += "bishop";
-//                break;
-//
-//            case KNIGHT:
-//                imageIdString += "knight";
-//                break;
-//
-//            case ROOK:
-//                imageIdString += "rook";
-//                break;
-//
-//            case QUEEN:
-//                imageIdString += "queen";
-//                break;
-//
-//            case KING:
-//                imageIdString += "king";
-//                break;
-//
-//            default:
-//                return null;
-//        }
-//
-//        return imageIdString;
+            case BISHOP:
+                imageIdString += "bishop";
+                break;
+
+            case KNIGHT:
+                imageIdString += "knight";
+                break;
+
+            case ROOK:
+                imageIdString += "rook";
+                break;
+
+            case QUEEN:
+                imageIdString += "queen";
+                break;
+
+            case KING:
+                imageIdString += "king";
+                break;
+
+            default:
+                return null;
+        }
+
+        return imageIdString;
     }
 }
