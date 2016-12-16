@@ -14,4 +14,5 @@
     <string name="white">White</string>
     <string name="previous_move">Previous Move</string>
     <string name="next_move">Next Move</string>
+    <string name="save_game_prompt">Would you like to save this game?</string>
 </resources>

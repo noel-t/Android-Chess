@@ -1,31 +1,20 @@
 package website.kale.androidchess;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.Gravity;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.GridLayout.LayoutParams;
-import android.widget.GridView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import java.lang.reflect.Field;
@@ -33,8 +22,6 @@ import java.util.List;
 
 public class PlayGameActivity extends AppCompatActivity {
     GridLayout chessGrid;
-    ArrayAdapter chessGridAdapter;
-    List<String> chessPieces;
     ImageView origin;
     ChessGame chessGame;
     String moveString = "";
@@ -131,23 +118,25 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    private int calculateNewIndex(float x, float y) {
-        // calculate which column to move to
-        final float cellWidth = chessGrid.getWidth() / chessGrid.getColumnCount();
-        final int column = (int)(x / cellWidth);
+    private class PromptToSaveGameDialogFragment extends android.app.DialogFragment {
 
-        // calculate which row to move to
-        final float cellHeight = chessGrid.getHeight() / chessGrid.getRowCount();
-        final int row = (int)Math.floor(y / cellHeight);
-
-        // the items in the GridLayout is organized as a wrapping list
-        // and not as an actual grid, so this is how to get the new index
-        int index = row * chessGrid.getColumnCount() + column;
-        if (index >= chessGrid.getChildCount()) {
-            index = chessGrid.getChildCount() - 1;
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.dialog_draw)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            makeMove("draw");
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+            return builder.create();
         }
-
-        return index;
     }
 
     @Override
@@ -156,7 +145,7 @@ public class PlayGameActivity extends AppCompatActivity {
         origin = null;
         setContentView(R.layout.activity_play_game);
         chessGrid = (GridLayout) findViewById(R.id.chessboard);
-        chessGame = new ChessGame();
+        chessGame = new ChessGame(getApplicationContext());
         drawBoard();
         drawPieces();
     }
@@ -192,10 +181,10 @@ public class PlayGameActivity extends AppCompatActivity {
             default:
                 break;
         }
-
     }
 
     private void handleEndGame() {
+        chessGame.serialize("testgame");
         finish();
     }
 

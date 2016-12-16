@@ -8,6 +8,7 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 import java.lang.reflect.Field;
+import java.util.List;
 import java.util.ListIterator;
 
 public class ReplayGameActivity extends AppCompatActivity {
@@ -21,9 +22,16 @@ public class ReplayGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
         chessGrid = (GridLayout) findViewById(R.id.chessboard);
-        chessGame = new ChessGame();
-        drawBoard();
-        drawPieces();
+        chessGame = new ChessGame(getApplicationContext());
+        List<ChessBoard> chessBoardList = chessGame.deserialize("testgame");
+
+        if (chessBoardList == null)
+            finish();
+        else {
+            chessBoardIterator = chessBoardList.listIterator();
+            drawBoard();
+            drawPieces();
+        }
     }
 
     private void nextMove(View view) {
