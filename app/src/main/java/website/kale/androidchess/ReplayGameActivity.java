@@ -34,7 +34,7 @@ public class ReplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private void nextMove(View view) {
+    public void nextMove(View view) {
         if (chessBoardIterator.hasNext()) {
             currentBoard = chessBoardIterator.next();
             drawBoard();
@@ -44,7 +44,7 @@ public class ReplayGameActivity extends AppCompatActivity {
         }
     }
 
-    private void previousMove(View view) {
+    public void previousMove(View view) {
         if (chessBoardIterator.hasPrevious()) {
             currentBoard = chessBoardIterator.previous();
             drawBoard();

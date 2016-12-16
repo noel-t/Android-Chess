@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PlayGameActivity" >
+    tools:context=".ReplayGameActivity" >
 
     <GridLayout
         android:id="@+id/chessboard"
@@ -32,15 +32,17 @@
             android:text="@string/previous_move"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/drawButton"
+            android:id="@+id/prevMoveButton"
             android:layout_weight="1"
-            android:onClick="callForDraw"/>
+            android:onClick="previousMove"/>
 
         <Button
-            android:text="@string/ai"
+            android:id="@+id/nextMoveButton"
+            android:text="@string/next_move"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="nextMove"/>
     </LinearLayout>
 
 

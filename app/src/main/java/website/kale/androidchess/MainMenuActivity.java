@@ -19,7 +19,7 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void playbackGame(View v) {
-        Intent switchToNewGameScreen = new Intent(v.getContext(), ReplayGameActivity.class);
-        startActivityForResult(switchToNewGameScreen, 0);
+        Intent switchToReplayGameScreen = new Intent(v.getContext(), ReplayGameActivity.class);
+        startActivityForResult(switchToReplayGameScreen, 0);
     }
 }

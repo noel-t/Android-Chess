@@ -162,6 +162,10 @@ public class PlayGameActivity extends AppCompatActivity {
         new ConfirmDrawDialogFragment().show(getFragmentManager(), "Confirm Draw");
     }
 
+    public void callForAI(View v) {
+        makeMove("ai");
+    }
+
     private void makeMove(String move) {
         String response = chessGame.androidMove(move);
         chessGrid.removeAllViews();
