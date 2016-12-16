@@ -1,7 +1,7 @@
 package website.kale.androidchess;
+import java.io.Serializable;
 
-
-public class ChessBoard {
+public class ChessBoard implements Serializable {
 	ChessPiece[][] board = new ChessPiece[8][8];
 	public boolean whiteToMove;
 	public boolean enPassant;

@@ -1,7 +1,7 @@
 package website.kale.androidchess;
+import java.io.Serializable;
 
-
-public abstract class ChessPiece {
+public abstract class ChessPiece implements Serializable {
 	public enum Color {
 		WHITE, BLACK;
 	}

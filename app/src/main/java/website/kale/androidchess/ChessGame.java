@@ -9,13 +9,13 @@ import java.util.ArrayList;
 
 public class ChessGame{
 	//public static boolean whiteToMove;
-	public static ChessBoard board;
-	public static boolean drawOffered;
-	public static boolean unDid;
-	public static boolean gameOver;
-	public static ChessPiece takenPiece;
-	public static ChessPiece.Type promotion;
-	public static ArrayList<ChessBoard> moveList;
+	public ChessBoard board;
+	public boolean drawOffered;
+	public boolean unDid;
+	public boolean gameOver;
+	public ChessPiece takenPiece;
+	public ChessPiece.Type promotion;
+	public ArrayList<ChessBoard> moveList;
 
 	ChessGame(){
 		board = new ChessBoard();
@@ -27,6 +27,18 @@ public class ChessGame{
 		promotion = null;
 		moveList = new ArrayList<ChessBoard>();
 		moveList.add(board.getCopy());
+	}
+
+	public void serialize(String url){
+		try{
+			FileOutputStream fos= new FileOutputStream(url);
+			ObjectOutputStream oos= new ObjectOutputStream(fos);
+			oos.writeObject(moveList);
+			oos.close();
+			fos.close();
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+		}
 	}
 
 	public String androidMove(String move){
@@ -251,7 +263,7 @@ public class ChessGame{
 	 * @return String of length 5 or 7, describing the user's move
 	 * @throws IOException if program fails to read user's input
 	 */
-	public static String getValidMove(boolean whiteToMove) throws IOException{
+	public String getValidMove(boolean whiteToMove) throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		boolean valid = false;
 		while(!valid){
@@ -293,7 +305,7 @@ public class ChessGame{
 	 * @param move a String of length 5 or 7 describing the player's attempted move.
 	 * @return boolean associated with the validity of the player's move.
 	 */
-	public static boolean validateMove(String move){
+	public boolean validateMove(String move){
 		move = move.trim();
 		move = move.toLowerCase();
 
@@ -352,7 +364,7 @@ public class ChessGame{
 	 * @param move String describing the player's attempted move
 	 * @return boolean telling describing the user's input is well-formatted
 	 */
-	public static boolean validateFormat(String move){
+	public boolean validateFormat(String move){
 		if(move.length() != 5 && move.length() != 7){
 			return false;
 		}
@@ -374,7 +386,7 @@ public class ChessGame{
 		return true;
 	}
 
-	public static boolean offerDraw() throws IOException{
+	public boolean offerDraw() throws IOException{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println();
 		if(board.whiteToMove){
@@ -401,7 +413,7 @@ public class ChessGame{
 	 * @param origin, the square holding the piece to be moved
 	 * @return boolean describing whether the player is trying to move his own piece.
 	 */
-	public static boolean checkMovingOwnPiece(Square origin){
+	public boolean checkMovingOwnPiece(Square origin){
 		if(board.board[origin.getRow()][origin.getColumn()] == null){
 			return false;
 		}
@@ -422,7 +434,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the given move is legal according to chess rules
 	 */
-	public static boolean checkLegality(Square origin, Square destination){
+	public boolean checkLegality(Square origin, Square destination){
 		if(board.board[destination.getRow()][destination.getColumn()] != null){ //Checks that piece can't move to square occupied by same color
 			if(board.board[origin.getRow()][origin.getColumn()].getColor() == board.board[destination.getRow()][destination.getColumn()].getColor()){
 				return false;
@@ -472,7 +484,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the move is legal.
 	 */
-	public static boolean checkKnightMove(Square origin, Square destination){
+	public boolean checkKnightMove(Square origin, Square destination){
 		int originRow = origin.getRow();
 		int originColumn = origin.getColumn();
 		int destRow = destination.getRow();
@@ -504,7 +516,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the move is legal.
 	 */
-	public static boolean checkQueenMove(Square origin, Square destination){
+	public boolean checkQueenMove(Square origin, Square destination){
 		int originRow = origin.getRow();
 		int originColumn = origin.getColumn();
 		int destRow = destination.getRow();
@@ -616,7 +628,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the move is legal.
 	 */
-	public static boolean checkPawnMove(Square origin, Square destination){ //TODO: En passant fix
+	public boolean checkPawnMove(Square origin, Square destination){ //TODO: En passant fix
 		int originRow = origin.getRow();
 		int originColumn = origin.getColumn();
 		int destRow = destination.getRow();
@@ -720,7 +732,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the move is legal.
 	 */
-	public static boolean checkBishopMove(Square origin, Square destination){
+	public boolean checkBishopMove(Square origin, Square destination){
 		int originRow = origin.getRow();
 		int originColumn = origin.getColumn();
 		int destRow = destination.getRow();
@@ -791,7 +803,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the move is legal.
 	 */
-	public static boolean checkRookMove(Square origin, Square destination){
+	public boolean checkRookMove(Square origin, Square destination){
 		int originRow = origin.getRow();
 		int originColumn = origin.getColumn();
 		int destRow = destination.getRow();
@@ -855,7 +867,7 @@ public class ChessGame{
 	 * @param destination, the square holding the destination of the piece to be moved
 	 * @return boolean describing whether the move is legal.
 	 */
-	public static boolean checkKingMove(Square origin, Square destination){
+	public boolean checkKingMove(Square origin, Square destination){
 		int originRow = origin.getRow();
 		int originColumn = origin.getColumn();
 		int destRow = destination.getRow();
@@ -981,7 +993,7 @@ public class ChessGame{
 	 * @param origin, the square holding the piece to be moved
 	 * @param destination, the square holding the destination of the piece to be moved
 	 */
-	public static void makeMove(Square origin, Square destination){
+	public void makeMove(Square origin, Square destination){
 		board.board[destination.getRow()][destination.getColumn()] = board.board[origin.getRow()][origin.getColumn()];
 		//board.board[destination.getRow()][destination.getColumn()].hasMoved = true;
 		board.board[origin.getRow()][origin.getColumn()] = null;
@@ -993,7 +1005,7 @@ public class ChessGame{
 	 * @param attackerColor, the Color that might be attacking the target
 	 * @return boolean telling whether the target is under attack
 	 */
-	public static boolean isThreatened(Square target, ChessPiece.Color attackerColor){
+	public boolean isThreatened(Square target, ChessPiece.Color attackerColor){
 		Square possibleThreat;
 
 		for(int row = 0; row < 8; row++){
@@ -1018,7 +1030,7 @@ public class ChessGame{
 	 * @param targetColor, the side whose turn it is
 	 * @return boolean telling whether the game is currently in Stalemate
 	 */
-	public static boolean isInStaleMate(ChessPiece.Color targetColor){
+	public boolean isInStaleMate(ChessPiece.Color targetColor){
 		if(isInCheck(targetColor)){
 			return false;
 		}
@@ -1068,7 +1080,7 @@ public class ChessGame{
 	 * @param targetColor, the color of the side who may be in check
 	 * @return boolean telling whether the given side is in check
 	 */
-	public static boolean isInCheck(ChessPiece.Color targetColor){
+	public boolean isInCheck(ChessPiece.Color targetColor){
 		ChessPiece.Color attackingColor;
 		if(targetColor == ChessPiece.Color.WHITE){
 			attackingColor = ChessPiece.Color.BLACK;
@@ -1096,7 +1108,7 @@ public class ChessGame{
 	 * @param targetColor, the color of the side who may be in Checkmate
 	 * @return boolean telling whether the given side is in Checkmate
 	 */
-	public static boolean isInCheckMate(ChessPiece.Color targetColor){
+	public boolean isInCheckMate(ChessPiece.Color targetColor){
 		boolean checkMate = true;
 
 		Square origin = new Square(0,0);
@@ -1174,7 +1186,7 @@ public class ChessGame{
 	 * @param column, the column index
 	 * @return boolean telling whether the given array indices are in bounds
 	 */
-	public static boolean isInBounds(int row, int column){
+	public boolean isInBounds(int row, int column){
 		if(row < 0 || row > 7 || column < 0 || column > 7){
 			return false;
 		}
@@ -1186,7 +1198,7 @@ public class ChessGame{
 	 * @param whiteToMove, boolean describing whose turn it is.
 	 * @return Color associated with the current turn
 	 */
-	public static ChessPiece.Color colorToMove(boolean whiteToMove){
+	public ChessPiece.Color colorToMove(boolean whiteToMove){
 		if(whiteToMove){
 			return ChessPiece.Color.WHITE;
 		}
@@ -1209,7 +1221,7 @@ public class ChessGame{
 	 * @param destination, the Square holding the given piece
 	 * @return ChessPiece, the piece at the square
 	 */
-	public static ChessPiece pieceAt(Square destination){
+	public ChessPiece pieceAt(Square destination){
 		if(board.board[destination.getRow()][destination.getColumn()] != null){
 			return board.board[destination.getRow()][destination.getColumn()];
 		}
@@ -1221,7 +1233,7 @@ public class ChessGame{
 	 * @param abbr, the abbreviation of a given Chess piece
 	 * @return ChessPiece, the enum associated with the given abbreviation.
 	 */
-	public static ChessPiece.Type abbreviationToType(char abbr){
+	public ChessPiece.Type abbreviationToType(char abbr){
 		if(abbr == 'b' || abbr == 'B'){
 			return ChessPiece.Type.BISHOP;
 		}
