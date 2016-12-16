@@ -1,14 +1,21 @@
 package website.kale.androidchess;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -17,6 +24,7 @@ import android.widget.GridLayout.LayoutParams;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.Toast;
 
@@ -30,12 +38,11 @@ public class PlayGameActivity extends AppCompatActivity {
     ImageView origin;
     ChessGame chessGame;
     String moveString = "";
-    boolean needsPiece = true;
 
-    class ChessPieceListener implements View.OnClickListener {
+    private final class ChessPieceListener implements View.OnClickListener {
         private final int row, column;
 
-        public ChessPieceListener(int row, int column) {
+        ChessPieceListener(int row, int column) {
             this.row = row;
             this.column = column;
         }
@@ -44,6 +51,9 @@ public class PlayGameActivity extends AppCompatActivity {
         public void onClick(View view) {
             ImageView thisView = (ImageView) view;
             if (origin == null) {
+                if (thisView.getDrawable() == null)
+                    return;
+
                 thisView.setBackgroundColor(Color.RED);
                 origin = thisView;
                 moveString += "" + ChessBoard.columnToChessFile(column) + ChessBoard.rowToChessRank(row);
@@ -54,6 +64,70 @@ public class PlayGameActivity extends AppCompatActivity {
                 origin.setBackgroundColor(0);
                 origin = null;
             }
+        }
+    }
+
+    class PieceDragListener implements View.OnDragListener {
+        private final int row, column;
+
+        PieceDragListener(int row, int column) {
+            this.row = row;
+            this.column = column;
+        }
+
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+            int action = event.getAction();
+            ImageView thisView = (ImageView) v;
+            switch (action) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    ClipData data = ClipData.newPlainText("", "");
+                    View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+                    v.startDragAndDrop(data, shadowBuilder, v, 0);
+                    v.setVisibility(View.INVISIBLE);
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    v.setBackground(thisView.getDrawable());
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+                    v.setBackground(thisView.getDrawable());
+                    break;
+                case DragEvent.ACTION_DROP:
+                    // Dropped, reassign View to ViewGroup
+                    View view = (View) event.getLocalState();
+                    ViewGroup owner = (ViewGroup) view.getParent();
+                    owner.removeView(view);
+                    LinearLayout container = (LinearLayout) v;
+                    container.addView(view);
+                    view.setVisibility(View.VISIBLE);
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+                    v.setBackground(thisView.getDrawable());
+                default:
+                    break;
+            }
+            return true;
+        }
+    }
+
+    private class ConfirmDrawDialogFragment extends android.app.DialogFragment {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(R.string.dialog_draw)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            makeMove("draw");
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    });
+            return builder.create();
         }
     }
 
@@ -96,7 +170,7 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     public void callForDraw(View v) {
-        makeMove("draw");
+        new ConfirmDrawDialogFragment().show(getFragmentManager(), "Confirm Draw");
     }
 
     private void makeMove(String move) {
@@ -104,8 +178,25 @@ public class PlayGameActivity extends AppCompatActivity {
         chessGrid.removeAllViews();
         drawBoard();
         drawPieces();
-        if (response != null)
-            Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+        if (response == null)
+            return;
+
+        Toast.makeText(this, response, Toast.LENGTH_SHORT).show();
+
+        switch (response) {
+            case "White wins":
+            case "Black wins":
+            case "Draw":
+                handleEndGame();
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void handleEndGame() {
+        finish();
     }
 
     private void drawBoard() {
@@ -134,7 +225,7 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int r = 0; r < 8; r++) {
             for (int c = 0; c < 8; c++) {
                 ImageView newSpace = new ImageView(this);
-                String imageResourceString = null;
+                String imageResourceString;
                 GridLayout.LayoutParams param = new GridLayout.LayoutParams();
                 param.height = 88;
                 param.width = 88;
@@ -153,23 +244,18 @@ public class PlayGameActivity extends AppCompatActivity {
                         newSpace.setImageResource(drawableId);
                     }
                     catch (Exception e) {
+                        finish();
                     }
                 }
 
                 newSpace.setOnClickListener(new ChessPieceListener(r, c));
+//                newSpace.setOnDragListener(new PieceDragListener());
                 chessGrid.addView(newSpace);
             }
         }
     }
 
     private String buildPieceImageStringByCoordinates(int row, int column) {
-//        if (needsPiece) {
-//            needsPiece = false;
-//            return "black_bishop";
-//        } else {
-//            needsPiece = true;
-//            return null;
-//        }
 
 
         Square coordinates = new Square(row, column);

@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainMenu extends AppCompatActivity {
+public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +19,7 @@ public class MainMenu extends AppCompatActivity {
     }
 
     public void playbackGame(View v) {
-        Intent switchToNewGameScreen = new Intent(v.getContext(), ReplayGame.class);
+        Intent switchToNewGameScreen = new Intent(v.getContext(), ReplayGameActivity.class);
         startActivityForResult(switchToNewGameScreen, 0);
     }
 }
