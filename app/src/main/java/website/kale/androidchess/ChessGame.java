@@ -21,7 +21,7 @@ public class ChessGame{
 	public ArrayList<ChessBoard> moveList;
 
 	ChessGame(Context context){
-		context = this.context;
+		this.context = context;
 		board = new ChessBoard();
 		board.initialize();
 		drawOffered = false;
