@@ -95,10 +95,13 @@ public class ChessGame{
 				}
 			}
 
-			//TODO: Draw Android Functionality
 			else if(move.compareToIgnoreCase("draw") == 0){
 				gameOver = true;
 				return message = "Draw";
+			}
+
+			else if(move.compareToIgnoreCase("ai") == 0){
+				ai(colorToMove(board.whiteToMove));
 			}
 
 			else{
@@ -159,8 +162,55 @@ public class ChessGame{
 			}
 		}
 		return "Unexpected error"; //This line should never be reached
+	}
 
+	public boolean ai(ChessPiece.Color targetColor){
+		boolean stalemate = true;
+		Square origin = new Square(0,0);
+		Square destination = new Square(0,0);
+		ChessPiece takenPiece = null;
+		String aiMove;
 
+		for(int row = 0; row < 8; row++){
+			for(int column = 0; column < 8; column++){
+				if(board.board[row][column] != null){
+					if(board.board[row][column].getColor() == targetColor){
+						origin.setRow(row);
+						origin.setColumn(column);
+						//Found piece of target color, is there anywhere to move that does not result in check?
+						for(int possibleRow = 0; possibleRow < 8; possibleRow++){
+							for(int possibleColumn = 0; possibleColumn < 8; possibleColumn++){
+								destination.setRow(possibleRow);
+								destination.setColumn(possibleColumn);
+								if(checkLegality(origin, destination)){
+									takenPiece = pieceAt(destination);
+									makeMove(origin,destination);
+									if(!isInCheck(targetColor)){
+										stalemate = false;
+									}
+
+									makeMove(destination,origin);
+									board.board[destination.getRow()][destination.getColumn()] = takenPiece;
+									if(!stalemate){
+										int rowOrigin = ChessBoard.rowToChessRank(origin.getRow());
+										char colOrigin = ChessBoard.columnToChessFile(origin.getColumn());
+										int rowDest = ChessBoard.rowToChessRank(destination.getRow());
+										char colDest = ChessBoard.columnToChessFile(destination.getColumn());
+
+										aiMove = "" + colOrigin + rowOrigin + " " + colDest + rowDest;
+										System.out.println(aiMove);
+										androidMove(aiMove);
+										return false;
+									}
+								}
+
+							}
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	/*public static void main(String[] args) throws IOException{
