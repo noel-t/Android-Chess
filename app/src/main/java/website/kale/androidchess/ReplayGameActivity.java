@@ -13,44 +13,47 @@ import java.util.ListIterator;
 
 public class ReplayGameActivity extends AppCompatActivity {
     GridLayout chessGrid;
-    ListIterator<ChessBoard> chessBoardIterator;
     ChessBoard currentBoard;
+    List<ChessBoard> chessBoardList;
+    int currentBoardIndex;
     ChessGame chessGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_game);
+        setContentView(R.layout.activity_replay_game);
         chessGrid = (GridLayout) findViewById(R.id.chessboard);
+        currentBoardIndex = 0;
         chessGame = new ChessGame(getApplicationContext());
-        List<ChessBoard> chessBoardList = chessGame.deserialize("testgame");
+        chessBoardList = chessGame.deserialize("testgame");
 
-        if (chessBoardList == null)
+        if (chessBoardList == null || chessBoardList.size() < currentBoardIndex)
             finish();
-        else {
-            chessBoardIterator = chessBoardList.listIterator();
-            drawBoard();
-            drawPieces();
-        }
+
+        currentBoard = chessBoardList.get(currentBoardIndex);
+        drawBoard();
+        drawPieces();
     }
 
     public void nextMove(View view) {
-        if (chessBoardIterator.hasNext()) {
-            currentBoard = chessBoardIterator.next();
+        if (chessBoardList.size() < (currentBoardIndex + 1) || chessBoardList.get(currentBoardIndex + 1) == null) {
+            Toast.makeText(this, "No next move", Toast.LENGTH_SHORT).show();
+        } else {
+            currentBoardIndex++;
+            currentBoard = chessBoardList.get(currentBoardIndex);
             drawBoard();
             drawPieces();
-        } else {
-            Toast.makeText(this, "No next move", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void previousMove(View view) {
-        if (chessBoardIterator.hasPrevious()) {
-            currentBoard = chessBoardIterator.previous();
+        if (currentBoardIndex == 0 || chessBoardList.get(currentBoardIndex - 1) == null) {
+            Toast.makeText(this, "No previous move", Toast.LENGTH_SHORT).show();
+        } else {
+            currentBoardIndex--;
+            currentBoard = chessBoardList.get(currentBoardIndex);
             drawBoard();
             drawPieces();
-        } else {
-            Toast.makeText(this, "No previous move", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,7 +112,7 @@ public class ReplayGameActivity extends AppCompatActivity {
 
     private String buildPieceImageStringByCoordinates(int row, int column) {
         Square coordinates = new Square(row, column);
-        ChessPiece piece = chessGame.pieceAt(coordinates);
+        ChessPiece piece = currentBoard.pieceAt(coordinates);
         String imageIdString = "";
 
         if (piece == null)
