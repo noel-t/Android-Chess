@@ -1,4 +1,6 @@
 package website.kale.androidchess;
+import android.content.Context;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -13,11 +15,13 @@ public class ChessGame{
 	public boolean drawOffered;
 	public boolean unDid;
 	public boolean gameOver;
+	public Context context;
 	public ChessPiece takenPiece;
 	public ChessPiece.Type promotion;
 	public ArrayList<ChessBoard> moveList;
 
-	ChessGame(){
+	ChessGame(Context context){
+		context = this.context;
 		board = new ChessBoard();
 		board.initialize();
 		drawOffered = false;
@@ -31,7 +35,7 @@ public class ChessGame{
 
 	public void serialize(String url){
 		try{
-			FileOutputStream fos= new FileOutputStream(url);
+			FileOutputStream fos= new FileOutputStream(context.getFilesDir().getPath().toString() + "/" + url);
 			ObjectOutputStream oos= new ObjectOutputStream(fos);
 			oos.writeObject(moveList);
 			oos.close();
@@ -45,7 +49,7 @@ public class ChessGame{
 		ArrayList<ChessBoard> deSerializedMoveList= new ArrayList<ChessBoard>();
 		try
 		{
-			FileInputStream fis = new FileInputStream(url);
+			FileInputStream fis = new FileInputStream(context.getFilesDir().getPath().toString() + "/" + url);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			deSerializedMoveList = (ArrayList) ois.readObject();
 			ois.close();
