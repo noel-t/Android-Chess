@@ -1,11 +1,13 @@
 package website.kale.androidchess;
 
+import java.io.Serializable;
+
 /**
  * Representation of a chess square
  * @author Noel Taide, Doug Wittnebert
  *
  */
-public class Square {
+public class Square implements Serializable{
 	private int row;
 	private int column;
 	public Square(int row, int column) {
