@@ -47,6 +47,13 @@ public class ChessBoard implements Serializable {
 		}
 	}
 
+	public ChessPiece pieceAt(Square destination){
+		if(board[destination.getRow()][destination.getColumn()] != null){
+			return board[destination.getRow()][destination.getColumn()];
+		}
+		return null;
+	}
+
 	/**
 	 * Prints board configuration using System.out.println()
 	 */
