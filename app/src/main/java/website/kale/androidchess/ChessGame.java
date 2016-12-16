@@ -41,6 +41,26 @@ public class ChessGame{
 		}
 	}
 
+	public ArrayList<ChessBoard> deserialize(String url){
+		ArrayList<ChessBoard> deSerializedMoveList= new ArrayList<ChessBoard>();
+		try
+		{
+			FileInputStream fis = new FileInputStream(url);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			deSerializedMoveList = (ArrayList) ois.readObject();
+			ois.close();
+			fis.close();
+			return deSerializedMoveList;
+		}catch(IOException ioe){
+			ioe.printStackTrace();
+			return null;
+		}catch(ClassNotFoundException c){
+			System.out.println("Class not found");
+			c.printStackTrace();
+			return null;
+		}
+	}
+
 	public String androidMove(String move){
 		String message = null;
 
